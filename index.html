@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TUP Thesis/Capstone Procedure Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --tup-red: #800000;
+        --tup-gold: #ffd700;
+      }
+      body {
+        background-color: #f8fafc;
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+      }
+      .step-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .step-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+      .active-tab {
+        border-bottom: 4px solid var(--tup-red);
+        color: var(--tup-red);
+        font-weight: 700;
+      }
+      .process-line {
+        position: absolute;
+        left: 27px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #e2e8f0;
+        z-index: 0;
+      }
+      .node-icon {
+        z-index: 10;
+        background: white;
+        border: 2px solid var(--tup-red);
+      }
+      .actor-tag {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body class="text-slate-800">
+    <!-- Header -->
+    <header
+      class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm"
+    >
+      <div
+        class="max-w-5xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4"
+      >
+        <div class="flex items-center gap-4">
+          <div
+            class="w-12 h-12 bg-red-800 rounded-full flex items-center justify-center text-white font-bold text-xl"
+          >
+            TUP
+          </div>
+          <div>
+            <h1 class="text-xl font-bold text-slate-900 leading-tight">
+              College of Science
+            </h1>
+            <p class="text-sm text-slate-500 font-medium">
+              Computer Studies Department
+            </p>
+          </div>
+        </div>
+        <nav class="flex gap-1 bg-slate-100 p-1 rounded-lg">
+          <button
+            onclick="switchTab('topic')"
+            id="tab-topic"
+            class="px-4 py-2 rounded-md text-sm transition-all active-tab"
+          >
+            Topic
+          </button>
+          <button
+            onclick="switchTab('proposal')"
+            id="tab-proposal"
+            class="px-4 py-2 rounded-md text-sm transition-all"
+          >
+            Proposal
+          </button>
+          <button
+            onclick="switchTab('final')"
+            id="tab-final"
+            class="px-4 py-2 rounded-md text-sm transition-all text-slate-600"
+          >
+            Final Defense
+          </button>
+          <button
+            onclick="switchTab('checking')"
+            id="tab-checking"
+            class="px-4 py-2 rounded-md text-sm transition-all text-slate-600"
+          >
+            Post-Defense
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8">
+      <!-- Welcome Section -->
+      <div
+        id="welcome-msg"
+        class="mb-8 p-6 bg-red-50 border border-red-100 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6"
+      >
+        <div class="flex-grow">
+          <h2 class="text-red-900 font-bold mb-1">Thesis/Capstone Roadmap</h2>
+          <p class="text-red-700 text-sm">
+            Select a phase above to view detailed steps, actors, and mandatory
+            requirements for your academic journey.
+          </p>
+        </div>
+        <a
+          href="https://drive.google.com/drive/folders/1OHsnsjL6oNmvlZ9SASfR-tdvKlMD-BSV?usp=drive_link"
+          target="_blank"
+          class="flex-shrink-0 bg-red-800 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-red-900 transition-colors flex items-center gap-2 shadow-md"
+        >
+          <i class="fa-brands fa-google-drive text-lg"></i>
+          Download Required Forms
+        </a>
+      </div>
+
+      <!-- Content Area -->
+      <div id="content-container" class="relative">
+        <!-- Timeline Line -->
+        <div class="process-line hidden md:block"></div>
+
+        <div id="steps-list" class="space-y-8">
+          <!-- Steps will be injected here by JS -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="max-w-5xl mx-auto px-4 py-12 text-center text-slate-400 text-sm border-t border-slate-200 mt-12"
+    >
+      <p>© 2024 Technological University of the Philippines - Manila</p>
+      <p class="mt-1">Computer Studies Department Thesis Guidelines</p>
+      <div class="mt-4">
+        <a
+          href="https://drive.google.com/drive/folders/1OHsnsjL6oNmvlZ9SASfR-tdvKlMD-BSV?usp=drive_link"
+          target="_blank"
+          class="text-red-800 hover:underline font-medium"
+        >
+          Access Form Repository (Google Drive)
+        </a>
+      </div>
+    </footer>
+
+    <script>
+      const processData = {
+        topic: {
+          title: "Topic Defense Procedure",
+          steps: [
+            {
+              title: "Topic Selection & Preparation",
+              actor: "Student & Subject Teacher",
+              desc: "Identify 3 research topics. Consult with professors to refine. Request 'Application for Oral Defense' form.",
+            },
+            {
+              title: "Document Preparation",
+              actor: "Student",
+              desc: "Develop detailed documents including Title, Intro, Problem Statement, Project Idea, Methodology, Technology Matrix, and References for each topic.",
+            },
+            {
+              title: "Review & Feedback",
+              actor: "Teacher / Dept. Head",
+              desc: "Manuscript review. Revisions may be required before moving forward.",
+            },
+            {
+              title: "Approval & Panel Invitation",
+              actor: "Teacher / Dept. Head",
+              desc: "Signing of Application form. Invitation of panel members. Dean approves the request for oral defense.",
+            },
+            {
+              title: "Topic Defense Proper",
+              actor: "Student & Panel",
+              desc: "Dress Code: Business Casual. 10-20 min presentation. Gesture of appreciation (snacks) for panel.",
+            },
+            {
+              title: "Assessment",
+              actor: "Panel members",
+              desc: "Rubric includes: Presentation Quality, Relevance, Clarity, Feasibility, Tech use, and Citations. Pass/Fail result documented.",
+            },
+          ],
+        },
+        proposal: {
+          title: "Proposal Defense Procedure",
+          steps: [
+            {
+              title: "Adviser Selection",
+              actor: "Teacher / Dept. Head",
+              desc: "Selection based on expertise and CHED/DBM guidelines. Secure 'Request of Adviser' form.",
+            },
+            {
+              title: "Comprehensive Manuscript",
+              actor: "Student",
+              desc: "Develop Chapters 1 (Setting), 2 (Conceptual Framework), and 3 (Methodology).",
+            },
+            {
+              title: "Review & Approval",
+              actor: "Adviser / Teacher",
+              desc: "Internal review of the full proposal manuscript. Revisions until approved for oral defense.",
+            },
+            {
+              title: "Panel Invitation",
+              actor: "Adviser / Student",
+              desc: "Coordination of panel schedules and securing Dean's approval for defense date.",
+            },
+            {
+              title: "Proposal Defense Proper",
+              actor: "Student & Panel",
+              desc: "20-30 min presentation. Detailed Q&A (15-30 mins). Business casual attire required.",
+            },
+            {
+              title: "Secure Approval",
+              actor: "Student",
+              desc: "Incorporate panel feedback and secure a copy of the approved project proposal.",
+            },
+          ],
+        },
+        final: {
+          title: "Final Defense Procedure",
+          steps: [
+            {
+              title: "Preparation of Full Manuscript",
+              actor: "Student",
+              desc: "Complete Chapters 1-5, including Results, Test Data, Capabilities, and Summary of Findings.",
+            },
+            {
+              title: "Adviser/Teacher Review",
+              actor: "Adviser & Subject Teacher",
+              desc: "Final internal check of results and technical implementation. Revisions required before signing application.",
+            },
+            {
+              title: "Final Defense Proper",
+              actor: "Student & Panel",
+              desc: "20-30 min presentation. Panel evaluates research contribution and impact.",
+            },
+            {
+              title: "Rubric & Evaluation",
+              actor: "Panel",
+              desc: "Rubric: Presentation Quality, Thoroughness of Ch 1-5, Research Contribution, Response to Questions.",
+            },
+          ],
+        },
+        checking: {
+          title: "Post-Defense Document Checking",
+          steps: [
+            {
+              title: "Panel Feedback & Sign-off",
+              actor: "Student & Panel",
+              desc: "Submit 'Panel Feedback, Comments, and Suggestion' form to be signed by each panel member after verifying changes.",
+            },
+            {
+              title: "Similarity & AI Writing Check (Initial)",
+              actor: "Adviser / Subject Teacher",
+              desc: "Submit PDF (Ch 1-5). Threshold: < 20% for both Similarity and AI writing. Revise until threshold is met.",
+            },
+            {
+              title: "Language Editing",
+              actor: "Language Editor",
+              desc: "Submit to editor preferred by Adviser. Secure 'Certification of Language Editing'.",
+            },
+            {
+              title: "URDS Final Verification",
+              actor: "URDS (IRTC 3rd Floor)",
+              desc: "Final institutional check. URDS issues 'Similarity Certification' if < 20% threshold is maintained.",
+            },
+            {
+              title: "Appendix Inclusion",
+              actor: "Student",
+              desc: "Both Language and Similarity certifications MUST be included in the manuscript Appendix.",
+            },
+            {
+              title: "Final Signatories",
+              actor: "Panel, Dept. Head, Dean",
+              desc: "Request final signatures on the Approval Sheet before book binding.",
+            },
+            {
+              title: "Hardbound Submission",
+              actor: "Student",
+              desc: "Provide 5 copies: 1. Subject Teacher, 2. Library, 3. ITSO, 4. Department, 5. Dean's Office.",
+            },
+          ],
+        },
+      };
+
+      function renderSteps(phase) {
+        const container = document.getElementById("steps-list");
+        const data = processData[phase];
+        container.innerHTML = `<h2 class="text-2xl font-black text-slate-900 mb-10 pl-2 md:pl-16 border-l-4 border-red-800 ml-1">${data.title}</h2>`;
+
+        data.steps.forEach((step, index) => {
+          const stepElement = document.createElement("div");
+          stepElement.className =
+            "relative flex flex-col md:flex-row gap-6 md:gap-10 items-start group";
+
+          stepElement.innerHTML = `
+                    <div class="flex-shrink-0 w-14 h-14 node-icon rounded-2xl flex items-center justify-center text-red-800 font-black text-xl shadow-sm border-2 border-red-100 group-hover:border-red-800 transition-colors">
+                        ${index + 1}
+                    </div>
+                    <div class="bg-white border border-slate-200 p-6 rounded-2xl flex-grow step-card">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+                            <h3 class="text-lg font-bold text-slate-900">${
+                              step.title
+                            }</h3>
+                            <span class="actor-tag px-2 py-1 bg-slate-100 text-slate-500 rounded font-semibold self-start md:self-center">
+                                <i class="fa-solid fa-user-tie mr-1"></i> ${
+                                  step.actor
+                                }
+                            </span>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed text-sm">${
+                          step.desc
+                        }</p>
+                        ${
+                          index === data.steps.length - 1 &&
+                          phase === "checking"
+                            ? `<div class="mt-4 p-3 bg-green-50 text-green-700 text-xs rounded-lg border border-green-100 font-medium">
+                                <i class="fa-solid fa-circle-check mr-1"></i> Final Requirement: Completion of all signatures and hardbound distribution.
+                             </div>`
+                            : ""
+                        }
+                    </div>
+                `;
+          container.appendChild(stepElement);
+        });
+      }
+
+      function switchTab(phase) {
+        // Update UI tabs
+        const tabs = ["topic", "proposal", "final", "checking"];
+        tabs.forEach((t) => {
+          const btn = document.getElementById(`tab-${t}`);
+          if (t === phase) {
+            btn.classList.add("active-tab", "bg-white", "shadow-sm");
+            btn.classList.remove("text-slate-600");
+          } else {
+            btn.classList.remove("active-tab", "bg-white", "shadow-sm");
+            btn.classList.add("text-slate-600");
+          }
+        });
+
+        // Smooth scroll to top and render
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        renderSteps(phase);
+      }
+
+      // Initialize with Topic phase
+      window.onload = () => renderSteps("topic");
+    </script>
+  </body>
+</html>
