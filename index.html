@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TUP Thesis/Capstone Procedure Guide</title>
+    <!-- Logo Section for Browser Tab (Favicon) -->
+    <link rel="icon" type="image/png" href="assets/tup_logo.png" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
@@ -151,7 +154,7 @@
     >
       <p>© 2025 Technological University of the Philippines - Manila</p>
       <p class="mt-1">Computer Studies Department Thesis Guidelines</p>
-      <p class="mt-1">Created by Ino Amador</p>
+      <p class="mt-1">Created by "Ino Amador"</p>
       <div class="mt-4">
         <a
           href="https://drive.google.com/drive/folders/1OHsnsjL6oNmvlZ9SASfR-tdvKlMD-BSV?usp=drive_link"
@@ -266,7 +269,7 @@
             {
               title: "Panel Feedback & Sign-off",
               actor: "Student & Panel",
-              desc: "Submit 'Panel Feedback, Comments, and Suggestion' form to be signed by each panel member after verifying changes. <br><br><strong>Manuscript Tenses Requirements:</strong><br>• Chapter 1 (Introduction): Past tense<br>• Chapter 2 (Literature): Present or Past (depending on quotes)<br>• Chapter 3 (Methodology): Definitely past tense<br>• Chapter 4 (Results/Analysis): Combination of past and present<br>• Chapter 5 (Recommendations/Conclusions): Present and future.",
+              desc: "Submit 'Panel Feedback, Comments, and Suggestion' form to be signed by each panel member after verifying changes. <br><br><strong>Manuscript Tense Requirements:</strong><br>• Chapter 1 (Introduction): Past tense<br>• Chapter 2 (Literature): Present or Past (depending on quotes)<br>• Chapter 3 (Methodology): Definitely past tense<br>• Chapter 4 (Results/Analysis): Combination of past and present<br>• Chapter 5 (Rec/Conclusion): Present and future.",
             },
             {
               title: "Similarity & AI Writing Check (Initial)",
@@ -294,9 +297,14 @@
               desc: "Request final signatures on the Approval Sheet before book binding.",
             },
             {
+              title: "Digital Submission & Repository",
+              actor: "Student & Subject Teacher",
+              desc: "Scan the manuscript with complete signatures of panel, Grammarian certification, and URDS certifications. Submit the soft copy (PDF) to preferred cloud storage (Google Drive/OneDrive). Developed system must be shared via repository including a 'README' with working/deployed system link, credentials (usernames/passwords) for all accounts, and software dev requirements.",
+            },
+            {
               title: "Hardbound Submission",
               actor: "Student",
-              desc: "Provide 5 copies: 1. Subject Teacher, 2. Library, 3. ITSO, 4. Department, 5. Dean's Office.",
+              desc: "Provide 5 copies: 1. Subject Teacher, 2. Library, 3. ITSO, 4. Department, and 5. Dean's Office.",
             },
           ],
         },
@@ -334,7 +342,7 @@
                           index === data.steps.length - 1 &&
                           phase === "checking"
                             ? `<div class="mt-4 p-3 bg-green-50 text-green-700 text-xs rounded-lg border border-green-100 font-medium">
-                                <i class="fa-solid fa-circle-check mr-1"></i> Final Requirement: Completion of all signatures and hardbound distribution.
+                                <i class="fa-solid fa-circle-check mr-1"></i> Final Requirement: Completion of all digital and physical submissions.
                              </div>`
                             : ""
                         }
