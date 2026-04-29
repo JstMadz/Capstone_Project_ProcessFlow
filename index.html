@@ -48,22 +48,32 @@
         transform: translateY(-2px);
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
       }
+
+      /* Utility to hide scrollbar for horizontal scrolling nav */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
     </style>
   </head>
   <body class="text-slate-800">
+    <!-- Header containing both Title and the Sticky Navigation -->
     <header
-      class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm"
+      class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm flex flex-col"
     >
+      <!-- Top Section: Title & Actions -->
       <div
-        class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4"
+        class="max-w-6xl w-full mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4"
       >
         <div class="flex items-center gap-4">
-          <img
-            src="assets/tup_logo.png"
-            alt="TUP Logo"
-            class="w-12 h-12 object-contain rounded-full"
-            onerror="this.src='https://ui-avatars.com/api/?name=TUP&background=800000&color=fff'"
-          />
+          <div
+            class="w-12 h-12 bg-[#800000] rounded-full flex items-center justify-center text-white font-bold text-xl flex-shrink-0"
+          >
+            TUP
+          </div>
           <div>
             <h1 class="text-xl font-bold text-slate-900 leading-tight">
               College of Science
@@ -76,10 +86,19 @@
         <a
           href="https://drive.google.com/drive/folders/1OHsnsjL6oNmvlZ9SASfR-tdvKlMD-BSV?usp=drive_link"
           target="_blank"
-          class="flex-shrink-0 bg-[#800000] text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-red-900 transition-colors flex items-center gap-2 shadow-md"
+          class="flex-shrink-0 bg-[#800000] text-white px-5 py-2 rounded-xl font-bold text-sm hover:bg-red-900 transition-colors flex items-center gap-2 shadow-sm"
         >
           <i class="fa-brands fa-google-drive text-lg"></i> Forms Repository
         </a>
+      </div>
+
+      <!-- Bottom Section: The Tabs (now immovable with the header) -->
+      <div class="w-full bg-slate-50 border-t border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 py-2 overflow-x-auto no-scrollbar">
+          <nav class="flex gap-2" id="phase-navigation">
+            <!-- Tabs injected dynamically by Javascript -->
+          </nav>
+        </div>
       </div>
     </header>
 
@@ -100,10 +119,6 @@
             your final hardbound submission, every critical instruction is
             centralized here.
           </p>
-          <nav
-            class="flex flex-wrap gap-2 bg-slate-100 p-1.5 rounded-xl"
-            id="phase-navigation"
-          ></nav>
         </div>
 
         <div
@@ -417,22 +432,28 @@
               title: "4. Developed System and Repository",
               actor: "Students",
               desc: `<div class="space-y-4">
-                                   <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                                       <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-brands fa-github text-slate-900"></i> 4.1 Repository setup</h4>
-                                       <p class="text-sm text-slate-600">Upload to a version control repository. Add the Instructor as a collaborator. Ensure organized project structure and clean source code.</p>
-                                   </div>
-                                   <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                                       <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-book-open text-slate-900"></i> 4.2 README.md Must-Haves</h4>
-                                       <p class="text-sm text-slate-600 mb-2">Table of Contents, About, Live Demo, Getting Started, Credentials, User Roles, Usage Guide, API Docs, Contributing, Security, License, Contact.</p>
-                                   </div>
-                                   <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                                       <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-server text-slate-900"></i> 4.3 System Config</h4>
-                                       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600">
-                                           <div><strong>Local:</strong> Installation, tools, environment setup, test credentials.</div>
-                                           <div><strong>Cloud:</strong> Hosting details, URL, deployment account, access credentials.</div>
-                                       </div>
-                                   </div>
-                               </div>`,
+                      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                          <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-brands fa-github text-slate-900"></i> 4.1 Repository setup</h4>
+                          <p class="text-sm text-slate-600">Upload to a version control repository. Add the Instructor as a collaborator. Ensure organized project structure and clean source code.</p>
+                      </div>
+                      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                          <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-book-open text-slate-900"></i> 4.2 README.md Must-Haves</h4>
+                          <p class="text-sm text-slate-600 mb-3">Table of Contents, About, Live Demo, Getting Started, Credentials, User Roles, Usage Guide, API Docs, Contributing, Security, License, Contact.</p>
+                          
+                          <!-- NEW LINK BUTTON INSERTED HERE -->
+                          <a href="https://github.com/Edamuza/Travel_Ease#about-the-project" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg text-xs font-bold hover:bg-blue-100 transition-colors">
+                              <i class="fa-solid fa-star text-amber-500"></i> View Best Example
+                          </a>
+                          
+                      </div>
+                      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                          <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-server text-slate-900"></i> 4.3 System Config</h4>
+                          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600">
+                              <div><strong>Local:</strong> Installation, tools, environment setup, test credentials.</div>
+                              <div><strong>Cloud:</strong> Hosting details, URL, deployment account, access credentials.</div>
+                          </div>
+                      </div>
+                  </div>`,
             },
             {
               title: "5. Google Drive Folder Structure",
