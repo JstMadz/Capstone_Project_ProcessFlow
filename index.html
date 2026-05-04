@@ -3,44 +3,176 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TUP Computer Studies:COS Thesis & Capstone Roadmap</title>
-    <link rel="icon" type="image/png" href="assets/tup_logo.png" />
+    <title>TUP Computer Studies: Thesis & Capstone Roadmap</title>
+    <link rel="icon" type="image/png" href="assets/cos_logo.png" />
+
+    <!-- External Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS (Merged into file for testing) -->
     <style>
-      .chart-container {
-        position: relative;
-        width: 100%;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        height: 300px;
-        max-height: 400px;
+      /* Base Variables */
+      :root {
+        --tup-red: #800000;
+        --header-height: 72px;
+        --sidebar-mobile: 70px;
+        --sidebar-tablet: 240px;
       }
-      @media (min-width: 768px) {
-        .chart-container {
-          height: 350px;
-        }
-      }
-      .tab-active {
-        border-bottom-width: 4px;
-        border-color: #800000;
-        color: #800000;
-        font-weight: 700;
-        background-color: #ffffff;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      }
-      .tab-inactive {
-        color: #475569;
-      }
+
       body {
         background-color: #f8fafc;
         font-family: "Inter", system-ui, -apple-system, sans-serif;
+        color: #1e293b;
       }
+
+      /* --------------------------------------
+           DESKTOP (>= 1024px)
+           Nav returns to previous location (Top)
+           -------------------------------------- */
+      @media (min-width: 1024px) {
+        .nav-wrapper {
+          width: 100%;
+          background-color: #f8fafc;
+          border-bottom: 1px solid #e2e8f0;
+        }
+        .nav-menu {
+          display: flex;
+          flex-direction: row;
+          max-width: 1152px;
+          margin: 0 auto;
+          padding: 0.5rem 1rem;
+          gap: 0.5rem;
+          overflow-x: auto;
+        }
+        .nav-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+          white-space: nowrap;
+          color: #475569;
+          font-weight: 500;
+          font-size: 0.875rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          border: none;
+          background: transparent;
+        }
+        .nav-btn:hover {
+          background-color: #f1f5f9;
+          color: #0f172a;
+        }
+        .tab-active {
+          border-bottom: 3px solid var(--tup-red);
+          border-radius: 0.5rem 0.5rem 0 0;
+          background-color: white;
+          color: var(--tup-red);
+          font-weight: 700;
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .main-wrapper,
+        .footer-wrapper {
+          max-width: 1152px;
+          margin: 0 auto;
+        }
+      }
+
+      /* --------------------------------------
+           TABLET & MOBILE (< 1024px)
+           Side Floating Nav
+           -------------------------------------- */
+      @media (max-width: 1023px) {
+        .nav-wrapper {
+          position: fixed;
+          top: var(--header-height);
+          left: 0;
+          height: calc(100vh - var(--header-height));
+          background-color: #ffffff;
+          border-right: 1px solid #e2e8f0;
+          z-index: 40;
+          overflow-y: auto;
+          box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+          transition: width 0.3s ease;
+        }
+        .nav-menu {
+          display: flex;
+          flex-direction: column;
+          padding: 1rem 0.5rem;
+          gap: 0.5rem;
+        }
+        .nav-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          border: none;
+          background: transparent;
+          color: #475569;
+          font-size: 0.875rem;
+          font-weight: 500;
+          border-radius: 0.5rem;
+        }
+        .nav-btn:hover {
+          background-color: #f1f5f9;
+          color: #0f172a;
+        }
+        .tab-active {
+          border-left: 4px solid var(--tup-red);
+          background-color: #fef2f2;
+          border-radius: 0 0.5rem 0.5rem 0;
+          color: var(--tup-red);
+          font-weight: 700;
+        }
+
+        /* Tablet (768px - 1023px) */
+        @media (min-width: 768px) {
+          .nav-wrapper {
+            width: var(--sidebar-tablet);
+          }
+          .main-wrapper,
+          .footer-wrapper {
+            margin-left: var(--sidebar-tablet);
+          }
+          .nav-btn {
+            padding: 0.75rem 1rem;
+            flex-direction: row;
+            text-align: left;
+          }
+        }
+
+        /* Mobile (< 768px) */
+        @media (max-width: 767px) {
+          .nav-wrapper {
+            width: var(--sidebar-mobile);
+          }
+          .main-wrapper,
+          .footer-wrapper {
+            margin-left: var(--sidebar-mobile);
+          }
+          .nav-btn {
+            flex-direction: column;
+            padding: 0.75rem 0;
+            align-items: center;
+            justify-content: center;
+          }
+          .nav-btn span {
+            display: none; /* Hide text, just icons */
+          }
+          .nav-btn i {
+            font-size: 1.25rem;
+            margin: 0;
+          }
+        }
+      }
+
+      /* Step Cards & Charts */
       .step-card {
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
@@ -49,7 +181,20 @@
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
       }
 
-      /* Utility to hide scrollbar for horizontal scrolling nav */
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        height: 300px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 320px;
+        }
+      }
+
+      /* Hidden Scrollbars */
       .no-scrollbar::-webkit-scrollbar {
         display: none;
       }
@@ -59,14 +204,12 @@
       }
     </style>
   </head>
-  <body class="text-slate-800">
-    <!-- Header containing both Title and the Sticky Navigation -->
-    <header
-      class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm flex flex-col"
-    >
-      <!-- Top Section: Title & Actions -->
+  <body>
+    <!-- Header containing Title and Navigation -->
+    <header class="bg-white sticky top-0 z-50 flex flex-col shadow-sm w-full">
+      <!-- Top Section -->
       <div
-        class="max-w-6xl w-full mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4"
+        class="h-[72px] border-b border-slate-200 w-full flex items-center justify-between px-4 lg:px-8 bg-white"
       >
         <div class="flex items-center gap-4">
           <img
@@ -77,85 +220,91 @@
           />
           <img
             src="assets/ched_logo.png"
-            alt="TUP Logo"
+            alt="CHED Logo"
             class="w-12 h-12 object-contain rounded-full"
-            onerror="this.src='https://ui-avatars.com/api/?name=TUP&background=800000&color=fff'"
+            onerror="this.src='https://ui-avatars.com/api/?name=CHED&background=800000&color=fff'"
           />
           <img
             src="assets/cos_logo.png"
-            alt="TUP Logo"
+            alt="COS Logo"
             class="w-12 h-12 object-contain rounded-full"
-            onerror="this.src='https://ui-avatars.com/api/?name=TUP&background=800000&color=fff'"
+            onerror="this.src='https://ui-avatars.com/api/?name=COS&background=800000&color=fff'"
           />
-          <div>
-            <h1 class="text-xl font-bold text-slate-900 leading-tight">
+          <div class="hidden sm:block">
+            <h1 class="text-lg font-bold text-slate-900 leading-tight">
               College of Science
             </h1>
-            <p class="text-sm text-slate-500 font-medium">
+            <p class="text-xs text-slate-500 font-medium">
               Computer Studies Department
             </p>
+          </div>
+          <div class="block sm:hidden">
+            <h1 class="text-lg font-bold text-slate-900">Thesis Guide</h1>
           </div>
         </div>
         <a
           href="https://drive.google.com/drive/folders/1OHsnsjL6oNmvlZ9SASfR-tdvKlMD-BSV?usp=drive_link"
           target="_blank"
-          class="flex-shrink-0 bg-[#800000] text-white px-5 py-2 rounded-xl font-bold text-sm hover:bg-red-900 transition-colors flex items-center gap-2 shadow-sm"
+          class="flex-shrink-0 bg-[#800000] text-white px-4 py-2 rounded-lg font-bold text-sm hover:bg-red-900 transition-colors flex items-center gap-2 shadow-sm"
         >
-          <i class="fa-brands fa-google-drive text-lg"></i> Forms Repository
+          <i class="fa-brands fa-google-drive"></i>
+          <span class="hidden sm:inline">Forms</span>
         </a>
       </div>
 
-      <!-- Bottom Section: The Tabs (now immovable with the header) -->
-      <div class="w-full bg-slate-50 border-t border-slate-200">
-        <div class="max-w-6xl mx-auto px-4 py-2 overflow-x-auto no-scrollbar">
-          <nav class="flex gap-2" id="phase-navigation">
-            <!-- Tabs injected dynamically by Javascript -->
-          </nav>
-        </div>
+      <!-- Navigation Wrapper (Sticky Top on Desktop, Side Floating on Tablet/Mobile) -->
+      <div class="nav-wrapper">
+        <nav id="phase-navigation" class="nav-menu no-scrollbar">
+          <!-- Tabs injected dynamically by script -->
+        </nav>
       </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-8 space-y-12">
-      <section>
+    <!-- Main Content Area -->
+    <main class="main-wrapper px-4 py-8 space-y-12 transition-all duration-300">
+      <!-- Interactive Guide Section -->
+      <section id="guide-section">
         <div
           class="bg-white p-6 rounded-t-2xl border-t border-x border-slate-200"
         >
           <h2
-            class="text-2xl font-black text-slate-900 mb-4 border-l-4 border-[#800000] pl-3"
+            class="text-2xl font-black text-slate-900 mb-2 border-l-4 border-[#800000] pl-3"
           >
             Interactive Phase Guide
           </h2>
-          <p class="text-slate-600 mb-6 leading-relaxed">
-            Navigate through the tabs to explore the detailed steps, assigned
-            actors, and specific documentation requirements for every stage of
-            your thesis or capstone project. From topic selection to your final
-            hardbound submission, every critical instruction is included here.
+          <p class="text-slate-600 leading-relaxed text-sm md:text-base">
+            Select a phase from the navigation menu to explore the detailed
+            steps, assigned actors, and specific documentation requirements.
+            From topic selection to your final hardbound submission, every
+            critical instruction is centralized here.
           </p>
         </div>
 
         <div
           class="bg-white p-6 md:p-8 rounded-b-2xl border-b border-x border-slate-200 shadow-sm"
           id="phase-content"
-        ></div>
+        >
+          <!-- Content injected dynamically by script -->
+        </div>
       </section>
 
+      <!-- Analytics Section -->
       <section
-        class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200"
+        class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 mb-8"
       >
         <h2
           class="text-2xl font-black text-slate-900 mb-4 border-l-4 border-[#800000] pl-3"
         >
           Roadmap Overview & Analytics
         </h2>
-        <p class="text-slate-600 mb-8 leading-relaxed">
-          Welcome to the interactive thesis and capstone roadmap. This dashboard
-          visualizes the distribution of requirements across your academic
-          journey and highlights the critical quality thresholds you must
-          maintain. Understanding these metrics early ensures proper time
-          management and adherence to university standards.
+        <p class="text-slate-600 mb-8 leading-relaxed text-sm md:text-base">
+          This dashboard visualizes the distribution of requirements across your
+          academic journey and highlights the critical quality thresholds you
+          must maintain. Understanding these metrics early ensures proper time
+          management.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
             <h3 class="text-lg font-bold text-slate-800 mb-2 text-center">
               Process Task Distribution
@@ -184,12 +333,14 @@
     </main>
 
     <footer
-      class="max-w-6xl mx-auto px-4 py-8 text-center text-slate-500 text-sm"
+      class="footer-wrapper px-4 py-8 text-center text-slate-500 text-sm border-t border-slate-200 mt-8 transition-all duration-300"
     >
       <p>© 2026 Technological University of the Philippines - Manila</p>
       <p class="mt-1">Computer Studies Department Thesis Guidelines</p>
+      <p class="mt-1">Created by @madzmador</p>
     </footer>
 
+    <!-- Javascript (Merged into file for testing) -->
     <script>
       const appState = {
         currentPhase: "topic",
@@ -364,7 +515,7 @@
         },
         bsis: {
           id: "bsis",
-          label: "5. Submission Guide Compliance",
+          label: "5. Submission Guide",
           icon: "fa-book-bookmark",
           intro:
             "Strict technical, formatting, and structural requirements specific to the BSIS program that must be adhered to throughout the project.",
@@ -444,28 +595,26 @@
               title: "4. Developed System and Repository",
               actor: "Students",
               desc: `<div class="space-y-4">
-                      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                          <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-brands fa-github text-slate-900"></i> 4.1 Repository setup</h4>
-                          <p class="text-sm text-slate-600">Upload to a version control repository. Add the Instructor as a collaborator. Ensure organized project structure and clean source code.</p>
-                      </div>
-                      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                          <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-book-open text-slate-900"></i> 4.2 README.md Must-Haves</h4>
-                          <p class="text-sm text-slate-600 mb-3">Table of Contents, About, Live Demo, Getting Started, Credentials, User Roles, Usage Guide, API Docs, Contributing, Security, License, Contact.</p>
-                          
-                          <!-- NEW LINK BUTTON INSERTED HERE -->
-                          <a href="https://github.com/Edamuza/Travel_Ease#about-the-project" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg text-xs font-bold hover:bg-blue-100 transition-colors">
-                              <i class="fa-solid fa-star text-amber-500"></i> View Best Example
-                          </a>
-                          
-                      </div>
-                      <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                          <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-server text-slate-900"></i> 4.3 System Config</h4>
-                          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600">
-                              <div><strong>Local:</strong> Installation, tools, environment setup, test credentials.</div>
-                              <div><strong>Cloud:</strong> Hosting details, URL, deployment account, access credentials.</div>
-                          </div>
-                      </div>
-                  </div>`,
+                                   <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                       <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-brands fa-github text-slate-900"></i> 4.1 Repository setup</h4>
+                                       <p class="text-sm text-slate-600">Upload to a version control repository. Add the Instructor as a collaborator. Ensure organized project structure and clean source code.</p>
+                                   </div>
+                                   <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                       <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-book-open text-slate-900"></i> 4.2 README.md Must-Haves</h4>
+                                       <p class="text-sm text-slate-600 mb-3">Table of Contents, About, Live Demo, Getting Started, Credentials, User Roles, Usage Guide, API Docs, Contributing, Security, License, Contact.</p>
+                                       
+                                       <a href="https://github.com/Edamuza/Travel_Ease" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg text-xs font-bold hover:bg-blue-100 transition-colors">
+                                           <i class="fa-solid fa-star text-amber-500"></i> View Best Example
+                                       </a>
+                                   </div>
+                                   <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                       <h4 class="font-bold text-slate-800 mb-2 flex items-center gap-2"><i class="fa-solid fa-server text-slate-900"></i> 4.3 System Config</h4>
+                                       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600">
+                                           <div><strong>Local:</strong> Installation, tools, environment setup, test credentials.</div>
+                                           <div><strong>Cloud:</strong> Hosting details, URL, deployment account, access credentials.</div>
+                                       </div>
+                                   </div>
+                               </div>`,
             },
             {
               title: "5. Google Drive Folder Structure",
@@ -508,16 +657,28 @@
 
         Object.values(phaseData).forEach((phase) => {
           const btn = document.createElement("button");
-          btn.className = `px-5 py-2.5 rounded-lg text-sm transition-all flex items-center gap-2 ${
-            appState.currentPhase === phase.id
-              ? "tab-active"
-              : "tab-inactive hover:bg-slate-200"
+          btn.className = `nav-btn ${
+            appState.currentPhase === phase.id ? "tab-active" : ""
           }`;
-          btn.innerHTML = `<i class="fa-solid ${phase.icon}"></i> ${phase.label}`;
+          btn.title = phase.label; // Tooltip for mobile users
+          btn.innerHTML = `<i class="fa-solid ${phase.icon} w-5 text-center"></i> <span>${phase.label}</span>`;
+
           btn.onclick = () => {
             appState.currentPhase = phase.id;
             renderNavigation();
             renderContent();
+
+            // Smooth scroll to content, handling header heights
+            const guideSection = document.getElementById("guide-section");
+            const elementPosition = guideSection.getBoundingClientRect().top;
+            const headerHeight = document.querySelector("header").offsetHeight;
+            const offsetPosition =
+              elementPosition + window.pageYOffset - headerHeight - 16;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth",
+            });
           };
           navContainer.appendChild(btn);
         });
@@ -662,6 +823,7 @@
         });
       }
 
+      // Initialize application
       window.addEventListener("DOMContentLoaded", () => {
         renderNavigation();
         renderContent();
