@@ -253,13 +253,17 @@
       }
       .modal-content {
         background-color: white;
-        padding: 0.5rem;
+        padding: 1.5rem;
         border-radius: 0.75rem;
         max-width: 90%;
         max-height: 90vh;
+        min-width: 320px;
+        min-height: 320px;
         position: relative;
         display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
       .modal-close {
         position: absolute;
@@ -278,13 +282,14 @@
         justify-content: center;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         transition: background-color 0.2s;
+        z-index: 10;
       }
       .modal-close:hover {
         background-color: #600000;
       }
       .modal-image {
         max-width: 100%;
-        max-height: calc(90vh - 1rem);
+        max-height: calc(90vh - 3rem);
         object-fit: contain;
         border-radius: 0.25rem;
       }
@@ -432,7 +437,39 @@
         <button class="modal-close" onclick="closeModal()">
           <i class="fa-solid fa-times"></i>
         </button>
-        <img src="" alt="Sample Document" id="modalImage" class="modal-image" />
+
+        <!-- Loading State -->
+        <div
+          id="modalLoading"
+          class="hidden flex-col items-center justify-center w-full h-full text-slate-400"
+        >
+          <i class="fa-solid fa-circle-notch fa-spin text-4xl mb-4"></i>
+          <p class="text-sm font-medium">Loading image...</p>
+        </div>
+
+        <!-- Missing File Fallback UI -->
+        <div
+          id="modalFallback"
+          class="hidden flex-col items-center justify-center text-center p-8 bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl w-full max-w-sm"
+        >
+          <i class="fa-regular fa-image text-5xl text-slate-300 mb-4"></i>
+          <h3 class="text-lg font-bold text-slate-800">Sample Image Missing</h3>
+          <p class="text-sm text-slate-500 mt-2">
+            Please upload your sample document to the following path:
+          </p>
+          <code
+            id="missingFileName"
+            class="mt-3 px-2 py-1 bg-slate-200 text-red-600 rounded text-xs font-mono break-all"
+          ></code>
+        </div>
+
+        <!-- Actual Image -->
+        <img
+          src=""
+          alt="Sample Document"
+          id="modalImage"
+          class="modal-image hidden"
+        />
       </div>
     </div>
 
@@ -748,12 +785,12 @@
               actor: "Students",
               desc: `<ul class="list-disc pl-5 space-y-2 text-slate-600 text-sm mb-4">
                        <li><strong>Cover Page:</strong> Single spacing only. <button onclick="openModal('assets/coverPage.png')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li>
-                       <li><strong>Approval Sheet:</strong> Single spacing only. <button onclick="openModal('assets/approvalSheet.png')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li>
-                       <li><strong>Running Head:</strong> Start in the Acknowledgement.<button onclick="openModal('assets/acknowledgementRunningHead.png')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li>(Cover page and Approval sheet are counted as <em>i</em> and <em>ii</em> respectively, but numbers are hidden)</li>
+                       <li><strong>Approval Sheet:</strong> Single spacing only. <button onclick="openModal('assets/approval-sheet.jpg')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li>
+                       <li><strong>Running Head:</strong> Start in the Acknowledgement.</li>
                        <li><strong>Pagination:</strong> Placed in the upper right side.</li>
-                       <li><strong>Acknowledgement Pagination:</strong> Starts at <em>iii</em>.</li>
+                       <li><strong>Acknowledgement Pagination:</strong> Starts at <em>iii</em> (Cover page and Approval sheet are counted as <em>i</em> and <em>ii</em> respectively, but numbers are hidden).</li>
                        <li><strong>Abstract:</strong> Use APA latest edition format.</li>
-                       <li><strong>Table of Contents:</strong> <button onclick="openModal('assets/tableOfContents.png')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li>
+                       <li><strong>Table of Contents:</strong> <button onclick="openModal('assets/table-of-contents.jpg')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li>
                    </ul>`,
             },
           ],
@@ -943,15 +980,40 @@
       function openModal(imageSrc) {
         const modal = document.getElementById("imageModal");
         const img = document.getElementById("modalImage");
-        img.src = imageSrc;
+        const fallback = document.getElementById("modalFallback");
+        const loading = document.getElementById("modalLoading");
+        const missingName = document.getElementById("missingFileName");
 
-        // Fallback if the image doesn't exist locally yet
-        img.onerror = function () {
-          this.src =
-            "https://via.placeholder.com/600x800.png?text=Sample+Image+Placeholder+(Add+to+assets+folder)";
+        // Show modal wrapper
+        modal.classList.add("show");
+
+        // Set initial loading state
+        img.classList.add("hidden");
+        fallback.classList.add("hidden");
+        loading.classList.remove("hidden");
+        loading.classList.add("flex"); // Ensure flex is applied when not hidden
+
+        missingName.textContent = imageSrc;
+
+        // Preload image
+        const tempImg = new Image();
+        tempImg.onload = function () {
+          loading.classList.add("hidden");
+          loading.classList.remove("flex");
+
+          img.src = this.src;
+          img.classList.remove("hidden");
+        };
+        tempImg.onerror = function () {
+          loading.classList.add("hidden");
+          loading.classList.remove("flex");
+
+          fallback.classList.remove("hidden");
+          fallback.classList.add("flex");
         };
 
-        modal.classList.add("show");
+        // Start loading
+        tempImg.src = imageSrc;
       }
 
       function closeModal() {
