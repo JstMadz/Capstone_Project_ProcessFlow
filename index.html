@@ -441,7 +441,7 @@
         <!-- Loading State -->
         <div
           id="modalLoading"
-          class="hidden flex-col items-center justify-center w-full h-full text-slate-400"
+          class="hidden flex-col items-center justify-center w-full h-full text-slate-400 min-h-[300px] min-w-[300px]"
         >
           <i class="fa-solid fa-circle-notch fa-spin text-4xl mb-4"></i>
           <p class="text-sm font-medium">Loading image...</p>
@@ -450,7 +450,7 @@
         <!-- Missing File Fallback UI -->
         <div
           id="modalFallback"
-          class="hidden flex-col items-center justify-center text-center p-8 bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl w-full max-w-sm"
+          class="hidden flex-col items-center justify-center text-center p-8 bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl w-full max-w-sm min-h-[300px]"
         >
           <i class="fa-regular fa-image text-5xl text-slate-300 mb-4"></i>
           <h3 class="text-lg font-bold text-slate-800">Sample Image Missing</h3>
@@ -784,13 +784,13 @@
               title: "7. Hardbound / Physical Copy Requirements",
               actor: "Students",
               desc: `<ul class="list-disc pl-5 space-y-2 text-slate-600 text-sm mb-4">
-                       <li><strong>Cover Page:</strong> Single spacing only. <button onclick="openModal('assets/coverPage.png')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li>
-                       <li><strong>Approval Sheet:</strong> Single spacing only. <button onclick="openModal('assets/approval-sheet.jpg')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li>
+                       <li><strong>Cover Page:</strong> Single spacing only. <button onclick="openModal('assets/coverPage.jpg')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li>
+                       <li><strong>Approval Sheet:</strong> Single spacing only. <button onclick="openModal('assets/approvalSheet.jpg')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li>
                        <li><strong>Running Head:</strong> Start in the Acknowledgement.</li>
                        <li><strong>Pagination:</strong> Placed in the upper right side.</li>
-                       <li><strong>Acknowledgement Pagination:</strong> Starts at <em>iii</em> (Cover page and Approval sheet are counted as <em>i</em> and <em>ii</em> respectively, but numbers are hidden).</li>
+                       <li><strong>Acknowledgement Pagination:</strong> Starts at <em>iii</em> <button onclick="openModal('assets/acknowledgementRunningHead.jpg')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li> (Cover page and Approval sheet are counted as <em>i</em> and <em>ii</em> respectively, but numbers are hidden).</li>
                        <li><strong>Abstract:</strong> Use APA latest edition format.</li>
-                       <li><strong>Table of Contents:</strong> <button onclick="openModal('assets/table-of-contents.jpg')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li>
+                       <li><strong>Table of Contents:</strong> <button onclick="openModal('assets/tableOfContents.jpg')" class="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-blue-700 border border-blue-200 rounded text-xs font-bold hover:bg-blue-50 transition-colors ml-2"><i class="fa-solid fa-image"></i> View Sample</button></li>
                    </ul>`,
             },
           ],
@@ -991,7 +991,7 @@
         img.classList.add("hidden");
         fallback.classList.add("hidden");
         loading.classList.remove("hidden");
-        loading.classList.add("flex"); // Ensure flex is applied when not hidden
+        loading.classList.add("flex"); // Ensure flex is applied
 
         missingName.textContent = imageSrc;
 
