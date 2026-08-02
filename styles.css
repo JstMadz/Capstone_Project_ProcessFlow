@@ -15,6 +15,66 @@ body {
   color: #1e293b;
 }
 
+@media (min-width: 1920px) {
+  body {
+    font-size: 18px;
+  }
+
+  .main-wrapper,
+  .footer-wrapper {
+    max-width: 1400px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .nav-menu {
+    max-width: 1400px;
+  }
+
+  .chart-container {
+    max-width: 620px;
+    height: 360px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .main-wrapper,
+  .footer-wrapper {
+    max-width: 1600px;
+  }
+
+  .nav-menu {
+    max-width: 1600px;
+    gap: 1rem;
+  }
+
+  .chart-container {
+    max-width: 700px;
+    height: 420px;
+  }
+}
+
+@media (min-width: 3840px) {
+  body {
+    font-size: 20px;
+  }
+
+  .main-wrapper,
+  .footer-wrapper {
+    max-width: 1800px;
+  }
+
+  .nav-menu {
+    max-width: 1800px;
+    padding: 1rem 2rem;
+  }
+
+  .chart-container {
+    max-width: 800px;
+    height: 480px;
+  }
+}
+
 /* --------------------------------------
      DESKTOP (>= 1024px)
      Nav returns to previous location (Top)
