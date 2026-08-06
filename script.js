@@ -483,10 +483,39 @@ function initCharts() {
   });
 }
 
+function animateVisitorCount(el, target, duration = 1200) {
+  const start = performance.now();
+  function tick(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target).toLocaleString();
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+async function initVisitorCounter() {
+  const countEl = document.getElementById("visitorCount");
+  const badge = document.getElementById("visitorBadge");
+  if (!countEl || !badge) return;
+  try {
+    const res = await fetch(
+      "https://abacus.jasoncameron.dev/hit/processflow-tup-manila/visits"
+    );
+    if (!res.ok) throw new Error("Counter API error");
+    const data = await res.json();
+    animateVisitorCount(countEl, data.value);
+    badge.classList.add("is-visible");
+  } catch (err) {
+    badge.style.display = "none";
+  }
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   renderNavigation();
   renderContent();
   initCharts();
+  initVisitorCounter();
 });
 
 function openModal(imageSrc) {

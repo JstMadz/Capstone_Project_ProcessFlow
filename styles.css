@@ -258,6 +258,17 @@ footer {
   border-top: 1px solid var(--border-color);
 }
 
+.visitor-badge {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.visitor-badge.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Mobile Responsive Footer */
 @media (max-width: 600px) {
   footer {

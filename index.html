@@ -164,11 +164,38 @@
     </main>
 
     <footer
-      class="footer-wrapper px-4 py-8 text-center text-slate-500 text-sm border-t border-slate-200 mt-8 transition-all duration-300"
+      class="footer-wrapper px-4 py-8 text-slate-500 text-sm border-t border-slate-200 mt-8 transition-all duration-300"
     >
-      <p>© 2026 Technological University of the Philippines - Manila</p>
-      <p class="mt-1">Computer Studies Department Thesis Guidelines</p>
-      <p class="mt-1">Created by @madzmador</p>
+      <div
+        class="max-w-5xl mx-auto flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <div class="text-center sm:text-left">
+          <p>© 2026 Technological University of the Philippines - Manila</p>
+          <p class="mt-1">Computer Studies Department Thesis Guidelines</p>
+          <p class="mt-1">Created by @madzmador</p>
+        </div>
+        <div
+          id="visitorBadge"
+          class="visitor-badge inline-flex items-center gap-2.5 rounded-full border border-slate-200 bg-white px-4 py-2 shadow-sm"
+        >
+          <span
+            class="flex h-7 w-7 items-center justify-center rounded-full bg-[#800000]/10"
+          >
+            <i class="fa-solid fa-eye text-xs text-[#800000]"></i>
+          </span>
+          <span class="flex items-baseline gap-1">
+            <span
+              id="visitorCount"
+              class="text-base font-bold tabular-nums text-slate-700"
+              >0</span
+            >
+            <span
+              class="text-[10px] font-medium uppercase tracking-wide text-slate-400"
+              >visitors</span
+            >
+          </span>
+        </div>
+      </div>
     </footer>
 
     <!-- Image Modal -->
